@@ -1,0 +1,36 @@
+<body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <div id="root4"></div>
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script type="text/javascript">
+        const rootElement = document.getElementById('root');
+        const element = React.createElement('div',{
+            className:"container",
+            children:'hello world'
+        })
+        console.log(element)
+        ReactDOM.render(element, rootElement)
+
+
+        const element2 = React.createElement('div',{className:"container-2"}, 'hello World-2', ' goodbye world')
+        ReactDOM.render(element2,document.getElementById('root2'))
+        console.log(element2)
+
+        const element3 = React.createElement('div', {
+            children : ['hellow ','world-3'],
+            className: 'container-3'
+        })
+        ReactDOM.render(element3, document.getElementById('root3'))
+        console.log(element3)
+
+        const element4 = React.createElement('div', {
+            children: React.createElement('span',null,'great',' Work!'),
+            className: 'container4'
+        })
+        ReactDOM.render(element4, document.getElementById('root4'))
+        console.log(element4)
+    </script>
+</body>
