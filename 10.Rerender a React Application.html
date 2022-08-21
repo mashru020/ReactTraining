@@ -1,0 +1,65 @@
+<body>
+    <div id="root"></div>
+    <div id="root-2"></div>
+    <div id="root-3"></div>
+    <div id="root-4"></div>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+        const rootElement = document.getElementById('root');
+        // const time = new Date().toLocaleTimeString();
+        // const element = <div>{time}</div>
+        // ReactDOM.render(element, rootElement)
+
+        function tick() {
+            const time = new Date().toLocaleTimeString();
+            const element = <div>
+                <div>JSX</div>
+                {time}
+            </div>
+            ReactDOM.render(element, rootElement)
+        }
+        setInterval(tick,1000);
+// =====================================================================
+        const rootElement2 = document.getElementById('root-2')
+        function tick2() {
+            const time = new Date().toLocaleTimeString();
+
+            const element = `<div>
+                <div>Normal Js</div>
+                ${time}
+            </div>`
+            rootElement2.innerHTML = element
+        }
+        setInterval(tick2,1000);
+// =================================================================================
+        const rootElement3 = document.getElementById('root-3')
+        function tick3() {
+            const time = new Date().toLocaleTimeString();
+            const element = `<div>
+                <div>Normal JS</div>
+                <input value="${time}" />
+                <input value="${time}" />
+            </div>`
+
+            rootElement3.innerHTML = element;
+        }
+        setInterval(tick3, 1000)
+//  ================================================================================
+        const rootElement4 = document.getElementById('root-4')
+
+        function tick4 () {
+            const time = new Date().toLocaleTimeString();
+            const element = <div>
+                <div>JSX</div>
+                <input value={time}/>
+                <input value={time}/>
+            </div>
+
+            ReactDOM.render(element, rootElement4)
+        }
+
+        setInterval(tick4,1000)
+    </script>
+</body>
