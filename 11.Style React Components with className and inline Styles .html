@@ -1,0 +1,162 @@
+<body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <div id="root4"></div>
+    <div id="root5"></div>
+    <div id="root6"></div>
+    <div id="root7"></div>
+    <div id="root8"></div>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <style>
+        .box {
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        .box--large {
+            width:270px;
+            height:270px;
+        }
+        .box--medium {
+            width:180px;
+            height:180px;
+        }
+        .box--small {
+            width:90px;
+            height:90px;
+        }
+
+    </style>
+    <script type="text/babel">
+        const element = (
+            <div>
+                <h1>1st step</h1>
+                <div className="box box--small" style={{background:"lightblue", fontStyle:"italic"}}>small lightblue box</div>
+                <div className="box box--medium" style={{background:"pink", fontStyle:"italic"}}>miedium pink box</div>
+                <div className="box box--large" style={{background:"lightgreen", fontStyle:"italic"}}>large lightgreen box</div>
+            </div>
+        )
+        ReactDOM.render(element, document.getElementById('root'))
+
+        function Box(props) {
+            return <div className="box" {...props}/>
+            // return <div {...props} className="box"/>
+        }
+        const element2 = (
+            <div>
+                <h1>2nd step Box component</h1>
+                <Box className="box--small" style={{background:"lightblue", fontStyle:"italic"}}>small lightblue box</Box>
+                <Box className="box--medium" style={{background:"pink", fontStyle:"italic"}}>miedium pink box</Box>
+                <Box className="box--large" style={{background:"lightgreen", fontStyle:"italic"}}>large lightgreen box</Box>
+            </div>
+        )
+
+        ReactDOM.render(element2, document.getElementById('root2'))
+        function Box3(props) {
+            // return <div className="box" {...props}/>
+            return <div {...props} className="box"/>
+        }
+        const element3 = (
+            <div>
+                <h1>3rd step className </h1>
+                <Box3 className="box--small" style={{background:"lightblue", fontStyle:"italic"}}>small lightblue box</Box3>
+                <Box3 className="box--medium" style={{background:"pink", fontStyle:"italic"}}>miedium pink box</Box3>
+                <Box3 className="box--large" style={{background:"lightgreen", fontStyle:"italic"}}>large lightgreen box</Box3>
+            </div>
+        )
+
+        ReactDOM.render(element3, document.getElementById('root3'))
+
+        function Box4 ({className='', ...rest}) {
+            return (
+                <div 
+                    className={`box ${className}`} 
+                    {...rest}
+                />
+            )
+        }
+        const element4 = (
+            <div>
+                <h1>4th step className (solution)</h1>
+                <Box4 className="box--small" style={{fontStyle:'italic', background:"lightblue"}}>small lightblue box</Box4>
+                <Box4 className="box--medium" style={{fontStyle:'italic', background:"pink"}}>miedium pink box</Box4>
+                <Box4 className="box--large" style={{fontStyle:'italic', background:"lightgreen"}}>large lightgreen box</Box4>
+            </div>
+        )
+
+        ReactDOM.render(element4, document.getElementById('root4'))
+
+
+        function Box5 ({className='', ...rest}) {
+            return (<div className={`box ${className}`} style={{fontStyle:'italic'}} {...rest}/>)
+            // return (<div className={`box ${className}`}{...rest}  style={{fontStyle:'italic'}} />)
+        }
+        const element5 = (
+            <div>
+                <h1>5th step style</h1>
+                <Box5 className="box--small" style={{background:"lightblue"}}>small lightblue box</Box5>
+                <Box5 className="box--medium" style={{background:"pink"}}>miedium pink box</Box5>
+                <Box5 className="box--large" style={{background:"lightgreen"}}>large lightgreen box</Box5>
+            </div>
+        )
+
+        ReactDOM.render(element5, document.getElementById('root5'))
+
+        function Box6 ({className='', ...rest}) {
+            // return (<div className={`box ${className}`} style={{fontStyle:'italic'}} {...rest}/>)
+            return (<div className={`box ${className}`}{...rest}  style={{fontStyle:'italic'}} />)
+        }
+        const element6 = (
+            <div>
+                <h1>6th step style</h1>
+                <Box6 className="box--small" style={{background:"lightblue"}}>small lightblue box</Box6>
+                <Box6 className="box--medium" style={{background:"pink"}}>miedium pink box</Box6>
+                <Box6 className="box--large" style={{background:"lightgreen"}}>large lightgreen box</Box6>
+            </div>
+        )
+
+        ReactDOM.render(element6, document.getElementById('root6'))
+
+        function Box7 ({className='',style='', ...rest}) {
+            // return (<div className={`box ${className}`} style={{fontStyle:'italic'}} {...rest}/>)
+            // return (<div className={`box ${className}`}{...rest}  style={{fontStyle:'italic'}} />)
+            return (<div className={`box ${className}`} style={{fontStyle:'italic', ...style}}{...rest}/>)
+        }
+        const element7 = (
+            <div>
+                <h1>7th step style (solution)</h1>
+                <Box7 className="box--small" style={{background:"lightblue"}}>small lightblue box</Box7>
+                <Box7 className="box--medium" style={{background:"pink"}}>miedium pink box</Box7>
+                <Box7 className="box--large" style={{background:"lightgreen"}}>large lightgreen box</Box7>
+            </div>
+        )
+
+        ReactDOM.render(element7, document.getElementById('root7'))
+
+        function Box8 ({className='', style='',size, ...rest}) {
+            const sizeClassName = size ? `box--${size}` : '';
+            return (
+                <div 
+                    className={`box ${className} ${sizeClassName}`} 
+                    style={{fontStyle:'italic', ...style}} 
+                    {...rest}
+                />
+            )
+        }
+        const element8 = (
+            <div>
+                <h1>8th step (generate className based on size)</h1>
+                <Box8 size="small" style={{background:"lightblue"}}>small lightblue box</Box8>
+                <Box8 size="medium" style={{background:"pink"}}>miedium pink box</Box8>
+                <Box8 size="large" style={{background:"lightgreen"}}>large lightgreen box</Box8>
+            </div>
+        )
+
+        ReactDOM.render(element8, document.getElementById('root8'))
+    </script>
+</body>
