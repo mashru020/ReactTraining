@@ -4,36 +4,71 @@
     <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
     <script type="text/babel">
-        function Name({name, onNameChange}) {
-            return (
-                <div>   
-                    <label>Nmae: </label>
-                    <input value={name} onChange={onNameChange}/>
-                </div>
-            )
-        }
-        function FavoriteAnimal () {
-            const [animal, setAnimal] = React.useState('')
+        // function Name({name, onNameChange}) {
+        //     return (
+        //         <div>   
+        //             <label>Nmae: </label>
+        //             <input value={name} onChange={onNameChange}/>
+        //         </div>
+        //     )
+        // }
+        // function FavoriteAnimal () {
+        //     const [animal, setAnimal] = React.useState('')
 
+        //     return (
+        //         <div>
+        //             <label>Favorite Animal: </label>
+        //             <input value={animal} onChange={event => setAnimal(event.target.value)}/>
+        //         </div>
+        //     )
+        // }
+
+        // function Display({name}) {
+        //     return <div>{`Hey ${name}, you are grate!`}</div>
+        // }
+
+        // function App() {
+        //     const [name, setName] = React.useState('')
+        //     return (
+        //         <form>
+        //             <Name name={name} onNameChange={event => setName(event.target.value)} />
+        //             <FavoriteAnimal />
+        //             <Display name={name}/>    
+        //         </form>
+        //     )
+        // }
+        function Name ({name, onNameChange}) {
             return (
                 <div>
-                    <label>Favorite Animal: </label>
-                    <input value={animal} onChange={event => setAnimal(event.target.value)}/>
+                    <label>Name :</label>    
+                    <input type="text" value={name} onChange={onNameChange}/>
                 </div>
             )
         }
-
-        function Display({name}) {
-            return <div>{`Hey ${name}, you are grate!`}</div>
-        }
-
+        function FavoriteAnimal({animal, onAnimalChange}) {
+            return(
+                <div>
+                    <label htmlFor="animal">Favorite Animal : </label>
+                    <input type="text" id="animal" onChange={onAnimalChange} />
+                </div>
+                )
+            }
+        function Display({name, animal}) {
+            return(
+                <div>
+                    {`Hey ${name}, you are great! `}
+                    {`Your favorite animal is ${animal}`}
+                    </div>
+                    )
+                }
         function App() {
+            const [animal , setAnimal] = React.useState('');
             const [name, setName] = React.useState('')
-            return (
+            return(
                 <form>
-                    <Name name={name} onNameChange={event => setName(event.target.value)} />
-                    <FavoriteAnimal />
-                    <Display name={name}/>    
+                    <Name name={name} onNameChange={(event) => setName(event.target.value)}/>
+                    <FavoriteAnimal animal={animal} onAnimalChange={event => setAnimal(event.target.value)}/>
+                    <Display name={name} animal={animal}/>
                 </form>
             )
         }
